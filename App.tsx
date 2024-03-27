@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Platform } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { SWRConfig } from "swr";
+
+import { fetcher } from "./src/utils/fetcher";
+import PostScreen from "./src/app/PostScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SWRConfig
+      value={{
+        fetcher,
+        dedupingInterval: 10000,
+      }}
+    >
+      <View style={styles.container}>
+        <PostScreen />
+
+        <StatusBar style="auto" />
+      </View>
+    </SWRConfig>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "ghostwhite",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Platform.OS === "android" ? 30 : 0,
   },
 });
