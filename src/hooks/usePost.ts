@@ -21,7 +21,7 @@ export function usePosts() {
 }
 
 // Creating a new post
-const createPost = async (url: string, postData: PostDataType) => {
+const createPost: any = async (url: string, postData: PostDataType) => {
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(postData),
